@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Track Order - Borderless Bazzar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Montserrat:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#393429",
+                        "inverse-primary": "#745b00",
+                        "inverse-on-surface": "#353025",
+                        "inverse-surface": "#ebe1d1",
+                        "on-tertiary-fixed": "#001e2f",
+                        "on-secondary-container": "#3b2d00",
+                        "tertiary": "#b7deff",
+                        "on-primary-fixed-variant": "#574400",
+                        "surface-container-highest": "#393429",
+                        "on-primary": "#3d2f00",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#241a00",
+                        "on-error-container": "#ffdad6",
+                        "surface-tint": "#f0c115",
+                        "on-background": "#ebe1d1",
+                        "surface-container-lowest": "#110e05",
+                        "secondary": "#ecc23e",
+                        "on-surface-variant": "#d1c5ac",
+                        "primary": "#ffd555",
+                        "surface-bright": "#3e392d",
+                        "secondary-container": "#b79100",
+                        "on-tertiary-fixed-variant": "#004b6f",
+                        "background": "#171309",
+                        "surface-container": "#231f15",
+                        "surface-dim": "#171309",
+                        "secondary-fixed-dim": "#ecc23e",
+                        "on-primary-container": "#5e4a00",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#f0c115",
+                        "on-tertiary-container": "#005278",
+                        "surface-container-low": "#1f1b11",
+                        "secondary-fixed": "#ffe08c",
+                        "primary-container": "#e6b800",
+                        "on-primary-fixed": "#241a00",
+                        "tertiary-fixed": "#c9e6ff",
+                        "primary-fixed": "#ffe08a",
+                        "surface-container-high": "#2e2a1f",
+                        "tertiary-fixed-dim": "#8bceff",
+                        "tertiary-container": "#74c6ff",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#584400",
+                        "on-tertiary": "#00344e",
+                        "on-surface": "#ebe1d1",
+                        "outline-variant": "#4e4633",
+                        "surface": "#171309",
+                        "on-secondary": "#3d2f00",
+                        "outline": "#9a9079",
+                        "brand-gold-primary": "#e6b800"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "stack-md": "16px",
+                        "gutter": "16px",
+                        "base-unit": "4px",
+                        "container-margin": "20px"
+                    },
+                    "fontFamily": {
+                        "heading-md": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-base": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "display-xl": ["Montserrat"],
+                        "heading-lg": ["Montserrat"],
+                        "action-bold": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "heading-md": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "body-base": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "display-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "heading-lg": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "action-bold": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "700"}]
+                    },
+                    "backgroundImage": {
+                        "brand-gold-gradient": "linear-gradient(135deg, #ffd555 0%, #e6b800 100%)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .status-pulse {
+            animation: pulse-gold 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-gold {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+        }
+        .glass-panel {
+            background: rgba(35, 31, 21, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(154, 144, 121, 0.1);
+        }
+        body {
+            background-color: #171309;
+            color: #ebe1d1;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+<body class="pb-32">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant flex justify-between items-center h-[64px] px-container-margin">
+<button class="active:scale-95 duration-200 text-on-surface">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-heading-md text-heading-md text-on-surface">Order #BB-2847291</h1>
+<button class="active:scale-95 duration-200 text-on-surface">
+<span class="material-symbols-outlined">share</span>
+</button>
+</header>
+<main class="mt-20 px-container-margin space-y-stack-lg">
+<!-- Order Summary Card -->
+<section class="bg-surface-container rounded-xl p-stack-md border border-outline-variant/30 flex gap-4">
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-highest">
+<img alt="Product" class="w-full h-full object-cover" data-alt="A studio-quality close-up of a pair of Sony WH-1000XM5 wireless noise-canceling headphones in elegant midnight black, resting on a reflective dark obsidian surface. The lighting is dramatic and moody, with golden rim-lighting highlighting the sleek curves and premium leather texture. The overall aesthetic is high-end fintech luxury, matching a black and gold brand identity with deep shadows and sophisticated highlights." src="https://lh3.googleusercontent.com/aida/ADBb0uhqiZHbJpGRByhQ3wFUyKN-g4c4OpPsF9eDvyS8RkevS45xKljfCYstmQoJEZRmrEB3QhO96Aj0U8Th_00CssrCe6tM6rQBGfj0cFdCYJj4KJ1iWNOtTRlH2bcVF5mEk633yj1aW7si93sN1JyzZRDNLC4t11Y1gOfwxE7ZbiDvFX5PkvRmdJasC8o8C4VxYrSc5Aep33bTWA2vWK97WcZ6QtK-U3zt9zIYPXL1EekVW9uwYeQ2-AEcCUA"/>
+</div>
+<div class="flex flex-col justify-between py-1">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-primary/10 text-primary font-label-caps text-[10px] px-2 py-0.5 rounded border border-primary/20 uppercase">Amazon.in</span>
+</div>
+<h2 class="font-body-base text-body-base font-semibold line-clamp-2">Sony WH-1000XM5 Wireless Noise Canceling Headphones</h2>
+</div>
+<div class="mt-2">
+<p class="font-heading-md text-heading-md text-primary">NPR 56,399</p>
+<a class="font-body-sm text-body-sm text-primary hover:underline flex items-center gap-1 mt-1" href="#">
+                        View invoice <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Vertical Status Timeline -->
+<section class="space-y-0 relative">
+<!-- Connecting Line -->
+<div class="absolute left-[11px] top-6 bottom-6 w-[2px] bg-outline-variant">
+<div class="absolute top-0 left-0 w-full h-[50%] bg-primary"></div>
+</div>
+<!-- State 1: Done -->
+<div class="relative flex gap-6 pb-stack-lg">
+<div class="z-10 bg-primary rounded-full w-6 h-6 flex items-center justify-center">
+<span class="material-symbols-outlined text-background text-[16px] font-bold" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<h3 class="font-heading-md text-heading-md text-on-surface">Order Confirmed</h3>
+<p class="font-body-sm text-body-sm text-primary/80 mt-0.5">May 14, 9:32 AM</p>
+<p class="font-body-base text-body-base text-on-surface-variant mt-1">Payment received, sourcing started</p>
+</div>
+</div>
+<!-- State 2: Done -->
+<div class="relative flex gap-6 pb-stack-lg">
+<div class="z-10 bg-primary rounded-full w-6 h-6 flex items-center justify-center">
+<span class="material-symbols-outlined text-background text-[16px] font-bold" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<h3 class="font-heading-md text-heading-md text-on-surface">Warehouse Received</h3>
+<p class="font-body-sm text-body-sm text-primary/80 mt-0.5">May 16, 4:18 PM</p>
+<p class="font-body-base text-body-base text-on-surface-variant mt-1">Item secured at our Delhi hub, quality checked</p>
+</div>
+</div>
+<!-- State 3: Active -->
+<div class="relative flex gap-6 pb-stack-lg">
+<div class="z-10 bg-background border-2 border-primary rounded-full w-6 h-6 flex items-center justify-center status-pulse">
+<div class="w-2.5 h-2.5 bg-primary rounded-full"></div>
+</div>
+<div>
+<h3 class="font-heading-md text-heading-md text-primary">Customs Clearance</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">In progress — Birgunj border</p>
+<p class="font-body-base text-body-base text-on-surface-variant mt-1">Expected to clear in 18–24 hours</p>
+</div>
+</div>
+<!-- State 4: Pending -->
+<div class="relative flex gap-6 pb-stack-lg">
+<div class="z-10 bg-outline-variant rounded-full w-6 h-6 flex items-center justify-center">
+</div>
+<div class="opacity-50">
+<h3 class="font-heading-md text-heading-md text-on-surface-variant">Out for Delivery</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Pending</p>
+</div>
+</div>
+<!-- State 5: Pending -->
+<div class="relative flex gap-6">
+<div class="z-10 bg-outline-variant rounded-full w-6 h-6 flex items-center justify-center">
+</div>
+<div class="opacity-50">
+<h3 class="font-heading-md text-heading-md text-on-surface-variant">Delivered</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Pending</p>
+</div>
+</div>
+</section>
+<!-- Live Map Card -->
+<section class="bg-surface-container rounded-xl overflow-hidden border border-outline-variant/30">
+<div class="h-48 w-full bg-surface-container-highest relative">
+<!-- Map Placeholder Representation -->
+<div class="absolute inset-0 bg-[#0a0907] opacity-60"></div>
+<!-- Simple Map Path Visualization -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none">
+<path d="M50,150 Q150,100 250,120 Q350,140 450,80" fill="none" stroke="#4e4633" stroke-dasharray="8 4" stroke-width="3"></path>
+<path d="M50,150 Q150,100 250,120" fill="none" stroke="#e6b800" stroke-width="3"></path>
+</svg>
+<!-- Location Markers -->
+<div class="absolute left-12 top-36 w-2 h-2 bg-on-surface-variant rounded-full"></div>
+<!-- Active Pulse at Birgunj -->
+<div class="absolute left-[58%] top-[58%] -translate-x-1/2 -translate-y-1/2">
+<div class="w-12 h-12 bg-primary/20 rounded-full animate-ping absolute"></div>
+<div class="z-20 bg-primary text-background p-1.5 rounded-lg shadow-lg flex items-center justify-center relative">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+</div>
+</div>
+<!-- Map Legend/Overlay -->
+<div class="absolute bottom-3 left-3 glass-panel px-3 py-1.5 rounded-lg border border-outline-variant/30">
+<p class="font-label-caps text-[9px] text-primary">CURRENTLY AT</p>
+<p class="font-body-sm text-body-sm font-bold text-on-surface">Birgunj Customs Hub</p>
+</div>
+</div>
+<div class="p-4 flex items-center justify-between border-t border-outline-variant/20">
+<div class="flex items-center gap-3">
+<div class="text-on-surface-variant">
+<p class="font-label-caps text-[10px] text-on-surface-variant/70">TRACKING ID</p>
+<p class="font-heading-md text-body-base font-bold">BB-IN-9824711</p>
+</div>
+</div>
+<button class="p-2 hover:bg-surface-variant/20 rounded-full active:scale-90 transition-all">
+<span class="material-symbols-outlined text-primary">content_copy</span>
+</button>
+</div>
+</section>
+<!-- Help Card -->
+<section class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/20 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</div>
+<div>
+<p class="font-body-base text-body-base font-semibold">Need help with this order?</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Average reply time: 4 minutes</p>
+</div>
+</section>
+</main>
+<!-- Bottom Actions Container -->
+<div class="fixed bottom-0 left-0 right-0 p-container-margin glass-panel border-t border-outline-variant/20 z-50">
+<div class="max-w-screen-md mx-auto grid grid-cols-2 gap-4">
+<button class="h-[54px] rounded-xl border-2 border-primary text-primary font-action-bold active:scale-95 transition-all">
+                Contact Support
+            </button>
+<button class="h-[54px] rounded-xl bg-brand-gold-gradient text-background font-action-bold shadow-lg active:scale-95 transition-all">
+                Track Live
+            </button>
+</div>
+</div>
+<script>
+        // Simple micro-interaction for the track live button
+        const trackBtn = document.querySelector('button:last-child');
+        trackBtn.addEventListener('click', () => {
+            trackBtn.innerHTML = '<span class="flex items-center gap-2"><svg class="animate-spin h-5 w-5 text-background" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Initializing...</span>';
+            setTimeout(() => {
+                trackBtn.innerHTML = 'Track Live';
+            }, 2000);
+        });
+
+        // Copy tracking ID animation
+        const copyBtn = document.querySelector('button .material-symbols-outlined[innerText="content_copy"]');
+        if (copyBtn) {
+            copyBtn.parentElement.addEventListener('click', () => {
+                const icon = copyBtn;
+                icon.innerText = 'check_circle';
+                setTimeout(() => {
+                    icon.innerText = 'content_copy';
+                }, 1500);
+            });
+        }
+    </script>
+</body></html>

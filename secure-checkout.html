@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout | Borderless Bazzar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Montserrat:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#393429",
+                        "secondary": "#ecc23e",
+                        "surface-container-lowest": "#110e05",
+                        "secondary-fixed": "#ffe08c",
+                        "tertiary": "#b7deff",
+                        "secondary-fixed-dim": "#ecc23e",
+                        "on-tertiary-fixed-variant": "#004b6f",
+                        "primary-container": "#e6b800",
+                        "surface-dim": "#171309",
+                        "on-secondary-container": "#3b2d00",
+                        "error-container": "#93000a",
+                        "on-secondary": "#3d2f00",
+                        "on-error": "#690005",
+                        "tertiary-container": "#74c6ff",
+                        "on-surface": "#ebe1d1",
+                        "on-background": "#ebe1d1",
+                        "inverse-surface": "#ebe1d1",
+                        "on-tertiary-fixed": "#001e2f",
+                        "on-tertiary": "#00344e",
+                        "surface-container": "#231f15",
+                        "surface": "#171309",
+                        "on-primary": "#3d2f00",
+                        "on-primary-container": "#5e4a00",
+                        "tertiary-fixed": "#c9e6ff",
+                        "on-primary-fixed": "#241a00",
+                        "surface-tint": "#f0c115",
+                        "primary-fixed": "#ffe08a",
+                        "on-primary-fixed-variant": "#574400",
+                        "on-tertiary-container": "#005278",
+                        "on-surface-variant": "#d1c5ac",
+                        "on-secondary-fixed": "#241a00",
+                        "outline-variant": "#4e4633",
+                        "surface-variant": "#393429",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#b79100",
+                        "outline": "#9a9079",
+                        "surface-container-high": "#2e2a1f",
+                        "surface-bright": "#3e392d",
+                        "inverse-on-surface": "#353025",
+                        "background": "#171309",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed-dim": "#f0c115",
+                        "on-secondary-fixed-variant": "#584400",
+                        "primary": "#ffd555",
+                        "tertiary-fixed-dim": "#8bceff",
+                        "surface-container-low": "#1f1b11",
+                        "inverse-primary": "#745b00",
+                        "brand-gold": "#d6b15e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "container-margin": "20px",
+                        "base-unit": "4px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "body-base": ["Inter"],
+                        "action-bold": ["Montserrat"],
+                        "heading-md": ["Inter"],
+                        "display-xl": ["Montserrat"],
+                        "label-caps": ["Inter"],
+                        "heading-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "body-base": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "action-bold": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "700"}],
+                        "heading-md": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                        "display-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "heading-lg": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .brand-gold-gradient {
+            background: linear-gradient(135deg, #f0c115 0%, #d6b15e 100%);
+        }
+        .bg-surface-elevated {
+            background-color: #1E1E1E;
+        }
+        .border-subtle {
+            border-color: #262626;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-base min-h-screen pb-32">
+<!-- Top AppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md px-container-margin py-4 border-b border-outline-variant/30 flex justify-between items-center">
+<a aria-label="Back" class="w-10 h-10 flex items-center justify-start text-on-surface transition-transform active:scale-95" href="cost-breakdown.html">
+<span class="material-symbols-outlined text-[28px]">arrow_back</span>
+</a>
+<h1 class="font-heading-lg text-heading-lg text-on-surface">Checkout</h1>
+<button aria-label="Security Info" class="w-10 h-10 flex items-center justify-end text-brand-gold transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">lock</span>
+</button>
+</header>
+<main class="pt-20 px-container-margin space-y-stack-lg">
+<!-- Order Summary Card -->
+<section class="bg-surface-elevated rounded-xl p-4 shadow-2xl relative">
+<div class="flex gap-4">
+<div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="A close-up, high-fidelity studio shot of Sony WH-1000XM5 headphones in a matte black finish, resting on a reflective dark surface. The lighting is dramatic and moody with golden highlights reflecting off the edges, capturing the premium minimalist aesthetic of high-end electronics. The background is a soft, deep charcoal gradient that emphasizes the sleek textures and sophisticated design of the luxury audio equipment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3h8Ez4czRyCImkGqpo-C56JOq6Es8kTtPRaV5FhZ_bDu0tvcK9MKUDG46B9NaSCtjucTgQEg-kGJiHRdsNdtQP4RelQKkS5cpc0PzeeZBN9At4AgN3xQsQu2dCyHfOKTUfwdiPTllCZ7GgPqNUPQtN0-qDO8xaowY33V3nejqMVrY201J0k4CpzY1OmGs-SqcZh0wqDFCza41T-tltaygzg_XSObDRBRbfO8vql1xK74p-zd_bBsJb31iyayLgtfPaUWUzmQt2m8"/>
+</div>
+<div class="flex-1">
+<h2 class="font-heading-md text-body-base leading-tight line-clamp-2">Sony WH-1000XM5 Noise Canceling Wireless Headphones</h2>
+<div class="flex items-center mt-1">
+<span class="px-2 py-0.5 rounded-full bg-primary-container/20 text-brand-gold font-label-caps text-[10px] uppercase tracking-wider">From Amazon.in</span>
+</div>
+<p class="text-brand-gold font-action-bold mt-1">NPR 56,399</p>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/20 flex justify-end">
+<a class="text-brand-gold font-label-caps flex items-center gap-1 hover:underline" href="#">
+                    View details <span class="material-symbols-outlined text-[14px]">expand_more</span>
+</a>
+</div>
+</section>
+<!-- Delivery Section -->
+<section class="space-y-4">
+<h3 class="font-heading-md text-heading-md text-on-surface">Deliver to</h3>
+<div class="bg-surface rounded-xl p-4 border border-outline-variant/30 flex justify-between items-start">
+<div class="space-y-1">
+<p class="font-action-bold text-on-surface">Aarav Sharma</p>
+<p class="text-on-surface-variant text-body-sm leading-relaxed">Putalisadak, Kathmandu,<br/>Bagmati 44600</p>
+<p class="text-on-surface-variant text-body-sm">+977 9841******</p>
+</div>
+<a class="text-brand-gold p-1" href="#">
+<span class="material-symbols-outlined">edit</span>
+</a>
+</div>
+<button class="text-brand-gold font-action-bold text-body-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">add_circle</span> Add new address
+            </button>
+</section>
+<!-- Payment Section -->
+<section class="space-y-4">
+<h3 class="font-heading-md text-heading-md text-on-surface">Pay with</h3>
+<div class="space-y-3">
+<!-- Method 1: Digital Wallet (Active) -->
+<div class="bg-surface-container-low border-2 border-brand-gold rounded-xl p-4 relative cursor-pointer">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-brand-gold" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="font-action-bold">Digital Wallets</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="bg-brand-gold text-surface px-2 py-0.5 rounded-full font-label-caps text-[10px]">MOST POPULAR</span>
+<span class="material-symbols-outlined text-brand-gold" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- eSewa Flow Inside -->
+<div class="mt-6 space-y-5">
+<div class="flex justify-between items-center gap-4">
+<button class="flex-1 py-3 px-2 rounded-lg bg-surface-container-highest border border-brand-gold flex items-center justify-center">
+<div class="w-8 h-8 rounded bg-[#60bb46] flex items-center justify-center font-bold text-white text-[10px]">eSewa</div>
+</button>
+<button class="flex-1 py-3 px-2 rounded-lg bg-surface-container-high border border-outline-variant/30 flex items-center justify-center opacity-60">
+<div class="w-8 h-8 rounded bg-[#5d2e8e] flex items-center justify-center font-bold text-white text-[10px]">Khalti</div>
+</button>
+<button class="flex-1 py-3 px-2 rounded-lg bg-surface-container-high border border-outline-variant/30 flex items-center justify-center opacity-60">
+<div class="w-8 h-8 rounded bg-[#e31e24] flex items-center justify-center font-bold text-white text-[10px]">FonePay</div>
+</button>
+</div>
+<div class="space-y-2">
+<label class="text-on-surface-variant font-label-caps">eSewa registered number</label>
+<input class="w-full h-14 bg-surface-container rounded-full border border-outline-variant/30 px-6 text-on-surface placeholder:text-on-surface-variant/50 focus:ring-1 focus:ring-brand-gold focus:border-brand-gold outline-none" placeholder="98XXXXXXXX" type="tel"/>
+<p class="text-on-surface-variant/70 text-body-sm flex items-center gap-1.5 px-2">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                                You'll receive a push notification to confirm payment
+                            </p>
+</div>
+</div>
+</div>
+<!-- Method 2: IPS -->
+<div class="bg-surface rounded-xl p-4 border border-outline-variant/30 flex justify-between items-center cursor-pointer hover:border-outline transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-brand-gold">account_balance</span>
+<span class="font-heading-md text-body-base">Connect IPS / Bank Transfer</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">radio_button_unchecked</span>
+</div>
+<!-- Method 3: COD -->
+<div class="bg-surface rounded-xl p-4 border border-outline-variant/30 flex justify-between items-center cursor-pointer hover:border-outline transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-brand-gold">payments</span>
+<div class="flex flex-col">
+<span class="font-heading-md text-body-base">Cash on Delivery</span>
+<span class="text-error font-label-caps text-[10px] mt-0.5">50% NOW REQUIRED</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">radio_button_unchecked</span>
+</div>
+</div>
+</section>
+<!-- Cashback Strip -->
+<section class="bg-surface-container-low rounded-lg overflow-hidden border-l-4 border-brand-gold p-4 flex justify-between items-center shadow-md">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-brand-gold">account_balance_wallet</span>
+<p class="text-body-base text-on-surface">Apply cashback: <span class="font-action-bold text-brand-gold">NPR 2,847</span> available</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface-variant after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-gold peer-checked:after:bg-surface"></div>
+</label>
+</section>
+<!-- Order Totals -->
+<section class="pt-4 border-t border-outline-variant/20 space-y-2">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="text-body-base">Subtotal</span>
+<span class="text-body-base">NPR 56,399</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="text-body-base">Service &amp; Shipping</span>
+<span class="text-body-base">NPR 0</span>
+</div>
+<div class="flex justify-between items-center mt-4">
+<span class="font-action-bold text-on-surface">Pay now (50%)</span>
+<span class="font-action-bold text-[24px] text-brand-gold">NPR 28,200</span>
+</div>
+<p class="text-right text-body-sm text-on-surface-variant/70 italic">Remaining NPR 28,199 on delivery</p>
+</section>
+<!-- Footer Info -->
+<footer class="flex flex-col items-center gap-2 py-8 opacity-60">
+<div class="flex items-center gap-2 text-label-caps">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                Secured by Borderless Bazzar · 256-bit SSL
+            </div>
+</footer>
+</main>
+<!-- Sticky Bottom CTA -->
+<div class="fixed bottom-0 left-0 w-full bg-surface/80 backdrop-blur-xl px-container-margin pt-4 pb-8 border-t border-outline-variant/10 z-50">
+<a class="w-full h-[54px] brand-gold-gradient rounded-xl flex items-center justify-center gap-3 text-surface font-action-bold text-action-bold transition-all active:scale-[0.98] shadow-[0_8px_30px_rgb(214,177,94,0.3)]" href="scan-to-pay.html">
+<span class="material-symbols-outlined">public</span>
+            PAY NPR 28,200 NOW
+        </a>
+</div>
+<script>
+        // Simple haptic feedback simulation
+        document.querySelectorAll('button, .cursor-pointer').forEach(el => {
+            el.addEventListener('click', () => {
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate(5);
+                }
+            });
+        });
+
+        // Toggle effect for payment methods
+        const methods = document.querySelectorAll('.cursor-pointer');
+        methods.forEach(m => {
+            m.addEventListener('click', function() {
+                // In a real app, this would update selection state
+                console.log('Payment method selected');
+            });
+        });
+    </script>
+</body></html>

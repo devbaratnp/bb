@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config={darkMode:"class",theme:{extend:{colors:{surface:"#171309",primary:"#ffd555",background:"#171309",outline:"#9a9079","outline-variant":"#4e4633","surface-container":"#231f15","surface-container-low":"#1f1b11","surface-container-high":"#2e2a1f","surface-container-highest":"#393429","on-surface":"#ebe1d1","on-surface-variant":"#d1c5ac",error:"#ffb4ab"},fontFamily:{heading:["Montserrat"],body:["Inter"]}}}}
+</script>
+<style>
+body{background:#000;color:#ebe1d1;font-family:'Inter',sans-serif}
+.brand-gold-gradient{background:linear-gradient(135deg,#ffd555 0%,#e6b800 100%)}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
+</style>
+</head><body class="pb-24">
+<header class="fixed top-0 w-full z-40 bg-surface/90 backdrop-blur border-b border-outline-variant/30 px-5 py-4 flex items-center justify-between"><a href="home.html" class="text-primary"><span class="material-symbols-outlined">arrow_back</span></a><h1 class="font-heading text-xl text-primary">Admin Catalog Feed</h1><span></span></header>
+<main class="pt-24 px-5 space-y-4">
+<div class="flex gap-2 overflow-x-auto"><span class="px-4 py-2 rounded-full bg-primary text-black text-sm font-bold">Trending</span><span class="px-4 py-2 rounded-full bg-surface-container-high text-sm">Flash Sales</span><span class="px-4 py-2 rounded-full bg-surface-container-high text-sm">Personalized</span></div>
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-surface-container rounded-xl p-3 border border-outline-variant/30"><p class="text-sm">Noise Canceling Earbuds</p><p class="text-primary font-bold mt-2">NPR 18,200</p></div>
+<div class="bg-surface-container rounded-xl p-3 border border-outline-variant/30"><p class="text-sm">K-Beauty Serum</p><p class="text-primary font-bold mt-2">NPR 2,150</p></div>
+<div class="bg-surface-container rounded-xl p-3 border border-outline-variant/30"><p class="text-sm">Running Shoes</p><p class="text-primary font-bold mt-2">NPR 13,590</p></div>
+<div class="bg-surface-container rounded-xl p-3 border border-outline-variant/30"><p class="text-sm">Smart Watch Strap</p><p class="text-primary font-bold mt-2">NPR 4,580</p></div>
+</div>
+<a href="cart.html" class="block w-full text-center brand-gold-gradient text-black font-bold rounded-xl py-3">Open Cart</a>
+</main>
+</body></html>

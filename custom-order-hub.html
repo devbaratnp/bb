@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Custom Order Hub | Borderless Bazzar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#001e2f",
+                        "on-primary-fixed-variant": "#574400",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#241a00",
+                        "surface-variant": "#393429",
+                        "on-primary-container": "#5e4a00",
+                        "tertiary-fixed": "#c9e6ff",
+                        "on-tertiary": "#00344e",
+                        "secondary-fixed": "#ffe08c",
+                        "on-secondary-container": "#3b2d00",
+                        "surface-tint": "#f0c115",
+                        "inverse-on-surface": "#353025",
+                        "on-tertiary-fixed-variant": "#004b6f",
+                        "on-secondary-fixed": "#241a00",
+                        "surface-container-low": "#1f1b11",
+                        "secondary-container": "#b79100",
+                        "tertiary-fixed-dim": "#8bceff",
+                        "on-surface-variant": "#d1c5ac",
+                        "surface-dim": "#171309",
+                        "surface": "#171309",
+                        "outline": "#9a9079",
+                        "surface-container": "#231f15",
+                        "primary-fixed-dim": "#f0c115",
+                        "on-tertiary-container": "#005278",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#110e05",
+                        "secondary-fixed-dim": "#ecc23e",
+                        "primary-fixed": "#ffe08a",
+                        "surface-container-highest": "#393429",
+                        "surface-bright": "#3e392d",
+                        "background": "#171309",
+                        "surface-container-high": "#2e2a1f",
+                        "secondary": "#ecc23e",
+                        "on-surface": "#ebe1d1",
+                        "tertiary-container": "#74c6ff",
+                        "on-secondary-fixed-variant": "#584400",
+                        "inverse-surface": "#ebe1d1",
+                        "on-secondary": "#3d2f00",
+                        "outline-variant": "#4e4633",
+                        "inverse-primary": "#745b00",
+                        "tertiary": "#b7deff",
+                        "primary-container": "#e6b800",
+                        "primary": "#ffd555",
+                        "on-error": "#690005",
+                        "on-background": "#ebe1d1",
+                        "on-primary": "#3d2f00",
+                        "on-error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-margin": "20px",
+                        "base-unit": "4px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "display-xl": ["Montserrat"],
+                        "body-sm": ["Inter"],
+                        "action-bold": ["Montserrat"],
+                        "heading-lg": ["Montserrat"],
+                        "heading-md": ["Inter"],
+                        "body-base": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "display-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "action-bold": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "700"}],
+                        "heading-lg": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "heading-md": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                        "body-base": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .brand-gold-gradient {
+            background: linear-gradient(135deg, #ffd555 0%, #ecc23e 100%);
+        }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        .custom-shadow {
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-base antialiased min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant flex justify-between items-center h-[64px] px-container-margin">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">menu</span>
+<h1 class="font-display-xl text-heading-md font-bold text-primary">Borderless Bazzar</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+</div>
+</header>
+<main class="pt-[84px] px-container-margin">
+<!-- Clipboard Interception Toast -->
+<div class="relative bg-surface-container border-l-4 border-primary rounded-xl p-stack-md mb-stack-lg animate-in slide-in-from-top duration-500 shadow-xl" id="clipboard-toast">
+<button class="absolute top-2 right-2 text-on-surface-variant hover:text-primary transition-colors" onclick="this.parentElement.remove()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">content_paste</span>
+<h3 class="font-action-bold text-primary text-[15px]">Flipkart link detected</h3>
+</div>
+<p class="text-body-sm text-on-surface-variant pr-6">
+                    We found a product link on your clipboard. Open it in our secure browser for an instant NPR quote?
+                </p>
+<div class="flex gap-3 mt-2">
+<button class="brand-gold-gradient text-on-primary-fixed font-action-bold py-2 px-4 rounded-lg text-body-sm active:scale-95 transition-transform">
+                        Open in App
+                    </button>
+<button class="text-primary font-action-bold py-2 px-4 rounded-lg text-body-sm hover:bg-primary/10 transition-colors" onclick="document.getElementById('clipboard-toast').remove()">
+                        Dismiss
+                    </button>
+</div>
+</div>
+</div>
+<!-- Hero Section -->
+<section class="mb-stack-lg">
+<h2 class="font-heading-lg text-heading-lg text-on-surface">Order from any global store</h2>
+<p class="text-body-base text-on-surface-variant mt-1">Don't see your store? Paste the link or enter details manually.</p>
+</section>
+<!-- URL Input Section -->
+<section class="mb-stack-lg">
+<div class="relative">
+<label class="block font-label-caps text-on-surface-variant mb-2 ml-1">PRODUCT URL</label>
+<div class="relative flex items-center">
+<textarea class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none placeholder:text-on-surface-variant/50" placeholder="Paste link from any store…" rows="2"></textarea>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-primary p-2 hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">content_paste_go</span>
+</button>
+</div>
+<button class="mt-3 text-primary font-action-bold text-body-sm flex items-center gap-1 hover:underline underline-offset-4">
+                    Or enter details manually <span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+</button>
+</div>
+</section>
+<!-- Manual Entry Section -->
+<section class="bg-surface-container rounded-xl p-stack-md border border-outline-variant space-y-stack-md mb-stack-lg">
+<div>
+<label class="block font-label-caps text-on-surface-variant mb-2">PRODUCT TITLE</label>
+<input class="w-full bg-surface-container-high border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:border-primary outline-none transition-all" placeholder="e.g. Sony WH-1000XM5 Headphones" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-gutter">
+<div>
+<label class="block font-label-caps text-on-surface-variant mb-2">ESTIMATED PRICE</label>
+<div class="flex items-center gap-2">
+<select class="bg-surface-container-high border border-outline-variant rounded-lg px-2 py-3 text-on-surface text-body-sm focus:border-primary outline-none w-20">
+<option>USD</option>
+<option>INR</option>
+<option>CNY</option>
+</select>
+<input class="flex-1 bg-surface-container-high border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:border-primary outline-none" placeholder="0.00" type="number"/>
+</div>
+</div>
+<div>
+<label class="block font-label-caps text-on-surface-variant mb-2">WEIGHT (KG)</label>
+<div class="relative">
+<input class="w-full bg-surface-container-high border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:border-primary outline-none pr-10" placeholder="0.5" type="number"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant font-label-caps">KG</span>
+</div>
+</div>
+</div>
+<div>
+<label class="block font-label-caps text-on-surface-variant mb-2">CATEGORY</label>
+<select class="w-full bg-surface-container-high border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:border-primary outline-none appearance-none">
+<option>Electronics</option>
+<option>Fashion</option>
+<option>Cosmetics</option>
+<option>Toys</option>
+<option>Home Goods</option>
+</select>
+</div>
+<div>
+<label class="block font-label-caps text-on-surface-variant mb-2">PRODUCT PHOTO (OPTIONAL)</label>
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-stack-lg flex flex-col items-center justify-center gap-2 hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[28px]">photo_camera</span>
+</div>
+<span class="text-body-sm text-on-surface-variant">Tap to add product photo</span>
+</div>
+</div>
+</section>
+<!-- Country Selector -->
+<section class="mb-stack-lg">
+<label class="block font-label-caps text-on-surface-variant mb-3">ORIGIN COUNTRY</label>
+<div class="flex overflow-x-auto gap-3 pb-2 no-scrollbar">
+<!-- India (Selected) -->
+<button class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-primary/10 border-2 border-primary rounded-full">
+<img alt="India" class="w-6 h-4 object-cover rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQxpQa4JhTB4yqf399aJi2QFg1tcWHRr_IFA8PZSmjEXZWrcqQIPuLXpNyeKOEN_sKY1NKEyIDBgmtZnIk7Phg37ppouFu3pT1u17bojMNtawdBXMpdTr7BbBiek8KOiCTjk92lcuj-4-XJS8KDXy3pjkjBmoyxzg9-KJsCVG88HgpeB2VZyTL8E16g6YSy7XDh5quZ67mqy_lghQ60vLS7azACg4FCuuevqcYLZ1FT4m0ELjr8vGDB87BLbEEQp7DAQn-IpSLnww"/>
+<span class="font-action-bold text-body-sm text-primary">India</span>
+</button>
+<!-- China -->
+<button class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-surface-container border border-outline-variant rounded-full hover:border-on-surface-variant transition-colors">
+<img alt="China" class="w-6 h-4 object-cover rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2aKSqE2VrDBESW9OSnQYu3H9g4_UedtqkjLrdRr2m_jgrxls1gDtzBC1t6SEpVmsQJLSNNr3Y8UIuA5Jv5SL9BGVBaRIqUED1fhpQd7QxMv-sTW-lzDqJRylbwf-bq7b2m8QOBfSyd3-1Lzcd1EcdbZjUDMJZC-CwnpRN-H4Qhtuu3sEfPC_-br2pJC-K7OIWkWPH05svP2Yre0G3HJzsfVe8BbcLKweifrwjRwoYmlMKZo5MIQBOhrKxho6ThxnDwDssQqhfMD4"/>
+<span class="font-body-base text-body-sm text-on-surface-variant">China</span>
+</button>
+<!-- USA -->
+<button class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-surface-container border border-outline-variant rounded-full hover:border-on-surface-variant transition-colors">
+<img alt="USA" class="w-6 h-4 object-cover rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKFSckTz9z5A3tKNXfRNgOQXUK8cPPBvREGVgdJVHPdFUVwug80T6JYHrhyimkF-bYpCPfufNOiTtONc-_0W0hiQT6_P6JmJ0AaY1C-OBB0hn0bsf85Fsobjb57DID23CQNe2FJOnk8I_a8_znrc5YLg-c8h6cJEC-Hch6MtkUDm9p5kMoMfCbyOEU6ARrEba5R9AYutEnJ_yJ4OID12PgJKVSCFtjg1LgizB2HLkY8coIap4LPxPgrvORXqtxwEZ8WSXWoAMyp-U"/>
+<span class="font-body-base text-body-sm text-on-surface-variant">USA</span>
+</button>
+<!-- Japan -->
+<button class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-surface-container border border-outline-variant rounded-full hover:border-on-surface-variant transition-colors">
+<img alt="Japan" class="w-6 h-4 object-cover rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwb3q02o7zlfp9EuPqy3Kp3W5i9foANVDdi495RtNeRXAttCz49CpPmPLUB-aAMFdOmzUS6pmTZcyF-Zbjd3pafAjfiURx2oa_7lrq7QG4Yg6-QEbrtij8t9pMnEt6ys2V6p-gQaLlUPhTE4xfbCNy6E9UB_vD3U7ab6Ip-_1hxbclZTlSjkaawMIrCZyz2PAOWGh1ynKUTkDdh7Tt-QNvwqNaKvpZ3AstHrTRRv5iQyQqmit5G_a5Kl_SR6F7Ep-Q_aaSmTyHges"/>
+<span class="font-body-base text-body-sm text-on-surface-variant">Japan</span>
+</button>
+<!-- UK -->
+<button class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-surface-container border border-outline-variant rounded-full hover:border-on-surface-variant transition-colors">
+<img alt="UK" class="w-6 h-4 object-cover rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhsD3gUDs-ZZJR6EZ7wfhOaEijE-OP1ldVdhE25ntvIWon4YX6ZBRicqSgvuqQTQCpFH0UN_L_2lZkMph4KEzh5WAknlQ-2JI2xVuOhaiD5F-qObyvwOMrrmBf1cd4FnsTvFIw2I-Os1xreeuroUVc5PVI3aEF88iHyznjnHsWxtEEIobzmyES2xkXhXUKaQwOnnMqgwl1iA20GQiHWKUyxTGK9WXO3j66wwgjmpKU6GbkHrDXGb8Mwp3vCLkrAzViNMnrQhoNsvY"/>
+<span class="font-body-base text-body-sm text-on-surface-variant">UK</span>
+</button>
+</div>
+<p class="mt-4 text-center text-body-sm text-on-surface-variant">
+                Exchange rate: <span class="text-primary">1 INR = NPR 1.60</span> • Updated 2 min ago
+            </p>
+</section>
+</main>
+<!-- Bottom Action & Navigation Shell -->
+<div class="fixed bottom-0 w-full z-50">
+<!-- Sticky CTA Area -->
+<div class="bg-background/80 backdrop-blur-xl px-container-margin py-stack-md border-t border-outline-variant">
+<button class="w-full h-[54px] brand-gold-gradient text-on-primary-fixed font-action-bold rounded-xl opacity-50 flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/10" disabled="" id="quote-btn">
+<span class="material-symbols-outlined">receipt_long</span>
+                GET INSTANT QUOTE
+            </button>
+</div>
+<!-- Bottom Nav Bar Component -->
+<nav class="bg-surface/80 backdrop-blur-xl border-t border-outline-variant flex justify-around items-center h-[80px] w-full pb-safe px-2 shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-label-caps text-label-caps">Market</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-label-caps text-label-caps">Wallet</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant relative" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-caps text-label-caps">Orders</span>
+<span class="absolute top-0 right-1 w-2 h-2 bg-error rounded-full"></span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-caps text-label-caps">Profile</span>
+</a>
+</nav>
+</div>
+<script>
+        // Simple logic to toggle button state based on manual input (for demo)
+        const inputs = document.querySelectorAll('input[type="text"], input[type="number"]');
+        const quoteBtn = document.getElementById('quote-btn');
+
+        const checkForm = () => {
+            let allFilled = true;
+            // Just checking the first two inputs for the demo logic
+            if(inputs[0].value.length < 3 || inputs[1].value.length < 1) {
+                allFilled = false;
+            }
+            
+            if (allFilled) {
+                quoteBtn.disabled = false;
+                quoteBtn.classList.remove('opacity-50');
+                quoteBtn.classList.add('active:scale-[0.98]');
+            } else {
+                quoteBtn.disabled = true;
+                quoteBtn.classList.add('opacity-50');
+            }
+        };
+
+        inputs.forEach(input => {
+            input.addEventListener('input', checkForm);
+        });
+
+        // Initialize micro-animations
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("Borderless Bazzar Hub Initialized");
+        });
+    </script>
+</body></html>

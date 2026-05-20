@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
+<title>Borderless Bazaar - Import Browser</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          surface: "#171309",
+          "surface-dim": "#171309",
+          "surface-container-lowest": "#110e05",
+          "surface-container-low": "#1a1610",
+          "surface-container": "#231f15",
+          "surface-container-high": "#2e2a1f",
+          "surface-container-highest": "#393429",
+          primary: "#ffd555",
+          "on-surface": "#ebe1d1",
+          "on-surface-variant": "#d1c5ac",
+          "outline-variant": "#4e4633",
+          error: "#ffb4ab",
+          success: "#22C55E",
+        },
+      },
+    },
+  };
+</script>
+<style>
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  .brand-gold-bg {
+    background: linear-gradient(135deg, #ffd555 0%, #ecc23e 50%, #f0c115 100%);
+  }
+  .glass {
+    background: rgba(17, 14, 5, 0.85);
+    backdrop-filter: blur(24px) saturate(1.3);
+    -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  }
+  .glass-light {
+    background: rgba(46, 42, 31, 0.5);
+    backdrop-filter: blur(16px) saturate(1.1);
+    -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  }
+  .material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    line-height: 1;
+  }
+  .material-symbols-outlined.fill {
+    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  @keyframes shimmerSlide {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes pulseGlow {
+    0%,
+    100% {
+      box-shadow: 0 0 12px rgba(255, 213, 85, 0.08);
+    }
+    50% {
+      box-shadow: 0 0 24px rgba(255, 213, 85, 0.18);
+    }
+  }
+  .shimmer {
+    animation: shimmerSlide 1.4s ease-in-out infinite;
+  }
+  .animate-fade {
+    animation: fadeUp 0.3s ease-out;
+  }
+  .animate-glow {
+    animation: pulseGlow 2.5s ease-in-out infinite;
+  }
+
+  .merchant-chip {
+    background: rgba(46, 42, 31, 0.4);
+    border-color: rgba(78, 70, 51, 0.2);
+    color: #a09884;
+    transition: all 0.2s;
+  }
+  .merchant-chip.active {
+    background: rgba(255, 213, 85, 0.1);
+    border-color: rgba(255, 213, 85, 0.4);
+    color: #ffd555;
+  }
+
+  #toast {
+    transition: opacity 0.25s, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  #toast.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  .panel-sheet {
+    border-radius: 20px 20px 0 0;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .panel-sheet.expanded {
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body class="bg-[#000000] text-on-surface font-['Inter'] antialiased select-none overflow-hidden">
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="fixed top-0 left-0 right-0 z-50">
+    <div class="glass border-b border-white/[0.05]">
+      <!-- Nav row: 36px -->
+      <div class="h-9 px-3 flex items-center gap-1">
+        <button id="back-btn" class="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-white/[0.06] active:scale-90 shrink-0 transition">
+          <span class="material-symbols-outlined text-[16px] text-white/60">arrow_back</span>
+        </button>
+        <button id="forward-btn" class="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-white/[0.06] active:scale-90 shrink-0 transition">
+          <span class="material-symbols-outlined text-[16px] text-white/40">arrow_forward</span>
+        </button>
+
+        <div class="flex-1 min-w-0 rounded-full bg-white/[0.05] border border-white/[0.06] px-2.5 h-6 flex items-center gap-1.5 cursor-pointer hover:border-primary/30 transition-colors group" id="url-display">
+          <span class="material-symbols-outlined text-[10px] text-primary/60 shrink-0">lock</span>
+          <span class="text-[9px] text-white/60 truncate font-['Inter'] font-medium" id="url-label">
+            <span class="text-primary/70 font-semibold" id="merchant-label">flipkart.com</span>
+            <span class="text-white/40">/search?q=...</span>
+          </span>
+          <span class="material-symbols-outlined text-[12px] text-white/20 ml-auto shrink-0">keyboard_arrow_down</span>
+        </div>
+
+        <button id="refresh-btn" class="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-white/[0.06] active:scale-90 shrink-0 transition">
+          <span class="material-symbols-outlined text-[16px] text-white/60">refresh</span>
+        </button>
+
+        <!-- Inline URL editor (hidden, replaces url-display on click) -->
+        <form id="url-form" class="hidden flex-1 min-w-0 rounded-full bg-white/[0.06] border border-primary/40 px-2.5 h-6 flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[10px] text-primary/60 shrink-0">link</span>
+          <input id="url-input" class="flex-1 bg-transparent text-[9px] text-white/80 outline-none border-none p-0 font-['Inter']" autocomplete="off" spellcheck="false" />
+          <button type="submit" class="shrink-0 px-2 py-0.5 rounded-full brand-gold-bg text-[7px] text-black font-extrabold uppercase tracking-wider font-['Montserrat']">Go</button>
+        </form>
+      </div>
+
+      <!-- Merchant pills: ~28px -->
+      <div class="px-3 pb-1.5 flex gap-1 overflow-x-auto scrollbar-hide" id="merchant-strip">
+        <button class="merchant-chip px-2.5 py-0.5 rounded-full text-[9px] font-semibold tracking-wide whitespace-nowrap border font-['Montserrat']" data-merchant="amazon">Amazon</button>
+        <button class="merchant-chip px-2.5 py-0.5 rounded-full text-[9px] font-semibold tracking-wide whitespace-nowrap border font-['Montserrat']" data-merchant="flipkart">Flipkart</button>
+        <button class="merchant-chip px-2.5 py-0.5 rounded-full text-[9px] font-semibold tracking-wide whitespace-nowrap border font-['Montserrat']" data-merchant="myntra">Myntra</button>
+        <button class="merchant-chip px-2.5 py-0.5 rounded-full text-[9px] font-semibold tracking-wide whitespace-nowrap border font-['Montserrat']" data-merchant="meesho">Meesho</button>
+      </div>
+
+      <!-- Trust strip: ~24px -->
+      <div class="px-3 pb-1.5 flex items-center gap-1.5 overflow-x-auto scrollbar-hide text-[8px] text-white/50 font-medium font-['Inter']">
+        <span class="flex items-center gap-1 shrink-0"><span class="material-symbols-outlined text-[10px] text-success fill">location_on</span> Nepal</span>
+        <span class="text-white/15">·</span>
+        <span class="flex items-center gap-1 shrink-0"><span class="material-symbols-outlined text-[10px] text-success fill">verified</span> Customs</span>
+        <span class="text-white/15">·</span>
+        <span class="flex items-center gap-1 shrink-0"><span class="material-symbols-outlined text-[10px] text-success fill">payments</span> COD</span>
+        <span class="text-white/15">·</span>
+        <span class="flex items-center gap-1 shrink-0"><span class="material-symbols-outlined text-[10px] text-primary">support_agent</span> 24/7 Nepal Support</span>
+      </div>
+
+      <!-- Progress bar -->
+      <div id="progress" class="h-[1.5px] brand-gold-bg" style="width:0%;opacity:0;transition:width 0.3s ease,opacity 0.25s"></div>
+    </div>
+  </header>
+
+  <!-- ═══ WEBVIEW (fills everything below header) ═══ -->
+  <div class="fixed top-[86px] left-0 right-0 bottom-0 z-0">
+    <iframe id="webview" class="w-full h-full bg-white" referrerpolicy="no-referrer" sandbox="allow-scripts allow-forms allow-same-origin allow-popups"></iframe>
+
+    <!-- Loading shimmer -->
+    <div id="loading-shimmer" class="absolute inset-0 z-10 pointer-events-none overflow-hidden opacity-0 transition-opacity duration-300">
+      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent shimmer"></div>
+    </div>
+
+    <!-- Brand edge fade -->
+    <div class="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-[#000000]/50 to-transparent pointer-events-none z-[2]"></div>
+
+    <!-- Blocked note -->
+    <div id="blocked-note" class="hidden absolute top-0 left-0 right-0 glass border-b border-error/20 p-3 z-20 animate-fade">
+      <div class="flex items-center gap-2.5">
+        <span class="material-symbols-outlined text-[16px] text-error shrink-0">gpp_bad</span>
+        <span class="text-[10px] text-white/70 flex-1 font-['Inter']">This site blocks embedding. Open externally to navigate.</span>
+        <button id="open-external" class="shrink-0 px-2.5 py-1 rounded-full bg-error/15 text-error text-[9px] font-bold font-['Montserrat']">Open</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ BOTTOM SHEET: FLOATING IMPORT PANEL ═══ -->
+  <div class="fixed left-3 right-3 z-40" style="bottom:calc(40px + env(safe-area-inset-bottom, 0px))">
+    <div id="import-panel" class="panel-sheet glass border border-white/[0.06] shadow-2xl overflow-hidden">
+      <!-- Collapsed -->
+      <div id="panel-collapsed" class="flex items-center gap-2.5 px-3.5 py-2.5 cursor-pointer" id="panel-hit">
+        <div class="w-7 h-7 rounded-lg bg-success/15 flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-[14px] text-success fill">check_circle</span>
+        </div>
+        <div class="flex-1 min-w-0 leading-tight">
+          <div class="text-[10px] text-white/80 font-semibold font-['Inter']">Ready to Import</div>
+          <div class="text-[14px] text-primary font-extrabold font-['Montserrat'] tracking-tight" id="est-price">NPR 2,450</div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="panel-toggle" class="w-6 h-6 rounded-full flex items-center justify-center hover:bg-white/[0.06] transition-colors">
+            <span class="material-symbols-outlined text-[14px] text-white/40" id="panel-chevron">expand_less</span>
+          </button>
+          <a href="cost-breakdown.html" class="px-3.5 h-8 rounded-xl brand-gold-bg flex items-center justify-center gap-1.5 animate-glow active:scale-[0.97] transition-transform">
+            <span class="material-symbols-outlined text-[13px] text-black fill">shopping_bag</span>
+            <span class="text-[10px] text-black font-extrabold tracking-[0.04em] font-['Montserrat']">Import</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Expanded -->
+      <div id="panel-expanded" class="hidden px-3.5 pb-3.5 pt-0 border-t border-white/[0.06] animate-fade space-y-2.5">
+        <div class="pt-2.5 space-y-2">
+          <div class="flex items-center justify-between text-[10px]">
+            <span class="text-white/40 font-['Inter']">Product Price</span>
+            <span class="text-white/80 font-semibold font-['Inter']">₹ 1,299</span>
+          </div>
+          <div class="flex items-center justify-between text-[10px]">
+            <span class="text-white/40 font-['Inter']">Shipping</span>
+            <span class="text-white/80 font-semibold font-['Inter']">₹ 350</span>
+          </div>
+          <div class="flex items-center justify-between text-[10px]">
+            <span class="text-white/40 font-['Inter']">Service Fee</span>
+            <span class="text-white/80 font-semibold font-['Inter']">NPR 180</span>
+          </div>
+          <div class="h-px bg-white/[0.06]"></div>
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] text-white/60 font-semibold font-['Inter']">Nepal Total</span>
+            <span class="text-[16px] text-primary font-extrabold font-['Montserrat']">NPR 2,450</span>
+          </div>
+          <div class="flex items-center gap-3 text-[9px] text-white/40 font-['Inter']">
+            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[9px] text-success fill">verified</span> Customs included</span>
+            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[9px] text-white/40">calendar_today</span> 5-8 days</span>
+          </div>
+          <div class="flex gap-2 pt-0.5">
+            <button id="open-external-bottom" class="flex-1 h-8 rounded-xl border border-white/[0.06] bg-white/[0.03] flex items-center justify-center gap-1 text-[9px] text-white/50 font-semibold hover:bg-white/[0.06] active:scale-[0.97] transition-all font-['Montserrat']">
+              <span class="material-symbols-outlined text-[12px]">open_in_new</span>
+              Open Site
+            </button>
+            <button id="share-url" class="flex-1 h-8 rounded-xl border border-white/[0.06] bg-white/[0.03] flex items-center justify-center gap-1 text-[9px] text-white/50 font-semibold hover:bg-white/[0.06] active:scale-[0.97] transition-all font-['Montserrat']">
+              <span class="material-symbols-outlined text-[12px]">content_copy</span>
+              Copy
+            </button>
+            <a href="cost-breakdown.html" class="flex-[2] h-8 rounded-xl brand-gold-bg flex items-center justify-center gap-1.5 active:scale-[0.97] transition-transform">
+              <span class="material-symbols-outlined text-[12px] text-black fill">shopping_bag</span>
+              <span class="text-[9px] text-black font-extrabold tracking-[0.02em] font-['Montserrat']">Import This Product</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ BOTTOM NAV ═══ -->
+  <nav class="fixed bottom-0 left-0 right-0 z-50 flex justify-around items-center h-[40px] px-4 bg-[#000000]/80 backdrop-blur-xl border-t border-white/[0.04]">
+    <a class="flex items-center gap-1 text-white/25 transition-colors hover:text-white/50" href="home.html">
+      <span class="material-symbols-outlined text-[16px]">home</span>
+      <span class="text-[7px] font-bold tracking-[0.12em] uppercase font-['Inter']">Home</span>
+    </a>
+    <a class="flex items-center gap-1 text-white/25 transition-colors hover:text-white/50" href="admin-catalog.html">
+      <span class="material-symbols-outlined text-[16px]">explore</span>
+      <span class="text-[7px] font-bold tracking-[0.12em] uppercase font-['Inter']">Browse</span>
+    </a>
+    <div class="flex items-center gap-1 text-primary">
+      <span class="material-symbols-outlined text-[16px] fill">language</span>
+      <span class="text-[7px] font-bold tracking-[0.12em] uppercase font-['Inter'] text-primary">Browser</span>
+    </div>
+    <a class="flex items-center gap-1 text-white/25 transition-colors hover:text-white/50 relative" href="cart.html">
+      <span class="material-symbols-outlined text-[16px]">shopping_bag</span>
+      <span class="absolute -top-1 -right-3 bg-primary text-black text-[6px] font-extrabold rounded-full w-2.5 h-2.5 flex items-center justify-center">3</span>
+      <span class="text-[7px] font-bold tracking-[0.12em] uppercase font-['Inter']">Cart</span>
+    </a>
+    <a class="flex items-center gap-1 text-white/25 transition-colors hover:text-white/50" href="my-wallet.html">
+      <span class="material-symbols-outlined text-[16px]">person</span>
+      <span class="text-[7px] font-bold tracking-[0.12em] uppercase font-['Inter']">Profile</span>
+    </a>
+  </nav>
+
+  <!-- ═══ TOAST ═══ -->
+  <div id="toast" class="fixed top-16 left-1/2 -translate-x-1/2 z-[70] px-3.5 py-2 rounded-full glass border border-white/[0.08] text-[10px] text-white/80 shadow-2xl opacity-0 scale-90 pointer-events-none font-['Inter'] whitespace-nowrap"></div>
+
+<script>
+(() => {
+  const merchantUrls = {
+    amazon: { label: "Amazon.in", url: "https://www.amazon.in/" },
+    flipkart: { label: "Flipkart", url: "https://www.flipkart.com/" },
+    myntra: { label: "Myntra", url: "https://www.myntra.com/" },
+    meesho: { label: "Meesho", url: "https://www.meesho.com/" },
+  };
+
+  const iframe = document.getElementById("webview");
+  const progress = document.getElementById("progress");
+  const blockedNote = document.getElementById("blocked-note");
+  const urlInput = document.getElementById("url-input");
+  const urlLabel = document.getElementById("url-label");
+  const merchantLabel = document.getElementById("merchant-label");
+  const urlDisplay = document.getElementById("url-display");
+  const urlForm = document.getElementById("url-form");
+  const loadingShimmer = document.getElementById("loading-shimmer");
+  const toast = document.getElementById("toast");
+  const panelCollapsed = document.getElementById("panel-collapsed");
+  const panelExpanded = document.getElementById("panel-expanded");
+  const panelChevron = document.getElementById("panel-chevron");
+  const panelToggle = document.getElementById("panel-toggle");
+  const estPrice = document.getElementById("est-price");
+  const statusLabel = document.querySelector("#panel-collapsed .text-white\\/80");
+
+  const params = new URLSearchParams(window.location.search);
+  const initialMerchant = (params.get("merchant") || "amazon").toLowerCase();
+
+  let currentUrl = merchantUrls[initialMerchant] ? merchantUrls[initialMerchant].url : merchantUrls.amazon.url;
+  let fallbackTimer = null;
+  let isLoading = false;
+  let activeMerchant = initialMerchant;
+  let panelOpen = false;
+
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(toast._hide);
+    toast._hide = setTimeout(() => toast.classList.remove("show"), 1800);
+  }
+
+  function normalizeUrl(v) {
+    const value = (v || "").trim();
+    if (!value) return currentUrl;
+    if (value.startsWith("http://") || value.startsWith("https://")) return value;
+    return "https://" + value;
+  }
+
+  function setLabelByUrl(url) {
+    try {
+      merchantLabel.textContent = new URL(url).hostname.replace("www.", "");
+    } catch {
+      merchantLabel.textContent = "Secure Browser";
+    }
+  }
+
+  function updateUrlDisplay(url) {
+    urlLabel.innerHTML = `<span class="text-primary/70 font-semibold">${merchantLabel.textContent}</span><span class="text-white/40">${url.replace(/^https?:\/\/(www\.)?/, "/").slice(0, 40)}</span>`;
+  }
+
+  function updateActiveChip(key) {
+    document.querySelectorAll(".merchant-chip").forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.merchant === key);
+    });
+    activeMerchant = key;
+  }
+
+  function simulateProductDetection(url) {
+    const isProduct = /\/dp\/|\/product\/|\/p\/|\/item\/|\/pd\/|\/prod\//i.test(url);
+    if (isProduct) {
+      estPrice.textContent = "NPR 2,450";
+      if (statusLabel) statusLabel.textContent = "Ready to Import";
+    } else {
+      estPrice.textContent = "—";
+      if (statusLabel) statusLabel.textContent = "Browsing store";
+    }
+  }
+
+  function loadUrl(raw) {
+    const url = normalizeUrl(raw);
+    currentUrl = url;
+    if (urlInput) urlInput.value = url;
+    setLabelByUrl(url);
+    updateUrlDisplay(url);
+    blockedNote.classList.add("hidden");
+    urlForm.classList.add("hidden");
+    urlDisplay.classList.remove("hidden");
+    if (panelOpen) togglePanel();
+
+    clearTimeout(fallbackTimer);
+    isLoading = true;
+    loadingShimmer.classList.remove("opacity-0");
+    progress.style.width = "0%";
+    progress.style.opacity = "1";
+
+    requestAnimationFrame(() => {
+      progress.style.width = "22%";
+    });
+
+    fallbackTimer = setTimeout(() => {
+      progress.style.width = "100%";
+      setTimeout(() => { progress.style.opacity = "0"; }, 200);
+      blockedNote.classList.remove("hidden");
+      isLoading = false;
+      loadingShimmer.classList.add("opacity-0");
+    }, 5000);
+
+    iframe.src = url;
+    simulateProductDetection(url);
+  }
+
+  iframe.addEventListener("load", () => {
+    progress.style.width = "100%";
+    isLoading = false;
+    loadingShimmer.classList.add("opacity-0");
+    clearTimeout(fallbackTimer);
+    setTimeout(() => { progress.style.opacity = "0"; }, 200);
+    try {
+      const u = iframe.contentWindow.location.href;
+      if (u && u !== "about:blank") {
+        currentUrl = u;
+        setLabelByUrl(u);
+        updateUrlDisplay(u);
+        if (urlInput) urlInput.value = u;
+        simulateProductDetection(u);
+      }
+    } catch {}
+  });
+
+  iframe.addEventListener("error", () => {
+    isLoading = false;
+    loadingShimmer.classList.add("opacity-0");
+  });
+
+  function togglePanel() {
+    panelOpen = !panelOpen;
+    panelExpanded.classList.toggle("hidden", !panelOpen);
+    panelChevron.textContent = panelOpen ? "expand_more" : "expand_less";
+  }
+
+  if (panelToggle) panelToggle.addEventListener("click", (e) => { e.stopPropagation(); togglePanel(); });
+  if (panelCollapsed) panelCollapsed.addEventListener("click", (e) => { if (!e.target.closest("a")) togglePanel(); });
+
+  urlDisplay.addEventListener("click", () => {
+    urlDisplay.classList.add("hidden");
+    urlForm.classList.remove("hidden");
+    if (urlInput) {
+      urlInput.value = currentUrl;
+      urlInput.focus();
+      urlInput.select();
+    }
+  });
+
+  urlForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (urlInput && urlInput.value) loadUrl(urlInput.value);
+  });
+
+  if (urlInput) {
+    urlInput.addEventListener("blur", () => {
+      setTimeout(() => {
+        urlForm.classList.add("hidden");
+        urlDisplay.classList.remove("hidden");
+        updateUrlDisplay(currentUrl);
+      }, 150);
+    });
+    urlInput.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") { urlInput.blur(); }
+    });
+  }
+
+  document.getElementById("refresh-btn").addEventListener("click", () => {
+    loadUrl(currentUrl);
+    showToast("Refreshing");
+  });
+
+  document.getElementById("back-btn").addEventListener("click", () => {
+    try {
+      if (iframe.contentWindow && iframe.contentWindow.history.length > 1) {
+        iframe.contentWindow.history.back();
+      } else {
+        window.location.href = "home.html";
+      }
+    } catch { window.location.href = "home.html"; }
+  });
+
+  document.getElementById("forward-btn").addEventListener("click", () => {
+    try {
+      if (iframe.contentWindow && iframe.contentWindow.history.length > 1) {
+        iframe.contentWindow.history.forward();
+      }
+    } catch {}
+  });
+
+  function openExternalCurrent() {
+    window.open(currentUrl, "_blank", "noopener,noreferrer");
+    showToast("Opening in external browser");
+  }
+
+  document.querySelectorAll("#open-external, #open-external-bottom").forEach((el) => {
+    el.addEventListener("click", openExternalCurrent);
+  });
+
+  document.getElementById("share-url").addEventListener("click", () => {
+    navigator.clipboard.writeText(currentUrl).then(() => showToast("Link copied")).catch(() => {});
+  });
+
+  document.querySelectorAll(".merchant-chip").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const key = btn.dataset.merchant;
+      const item = merchantUrls[key];
+      if (!item) return;
+      loadUrl(item.url);
+      merchantLabel.textContent = item.label;
+      updateActiveChip(key);
+    });
+  });
+
+  loadUrl(currentUrl);
+  merchantLabel.textContent = merchantUrls[initialMerchant] ? merchantUrls[initialMerchant].label : "Secure Browser";
+  updateUrlDisplay(currentUrl);
+  updateActiveChip(initialMerchant);
+})();
+</script>
+</body>
+</html>

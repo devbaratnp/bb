@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cost Breakdown - Borderless Bazzar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#2e2a1f",
+                        "on-secondary": "#3d2f00",
+                        "primary-container": "#e6b800",
+                        "outline": "#9a9079",
+                        "surface-variant": "#393429",
+                        "error-container": "#93000a",
+                        "surface-dim": "#171309",
+                        "primary": "#ffd555",
+                        "inverse-primary": "#745b00",
+                        "background": "#171309",
+                        "tertiary-container": "#74c6ff",
+                        "on-tertiary-fixed-variant": "#004b6f",
+                        "inverse-on-surface": "#353025",
+                        "surface-container-low": "#1f1b11",
+                        "on-primary-fixed": "#241a00",
+                        "on-background": "#ebe1d1",
+                        "on-error": "#690005",
+                        "on-primary-container": "#5e4a00",
+                        "on-secondary-fixed": "#241a00",
+                        "tertiary": "#b7deff",
+                        "tertiary-fixed-dim": "#8bceff",
+                        "on-tertiary-fixed": "#001e2f",
+                        "secondary-container": "#b79100",
+                        "secondary-fixed": "#ffe08c",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#574400",
+                        "outline-variant": "#4e4633",
+                        "surface": "#171309",
+                        "on-surface-variant": "#d1c5ac",
+                        "secondary": "#ecc23e",
+                        "primary-fixed-dim": "#f0c115",
+                        "on-secondary-container": "#3b2d00",
+                        "inverse-surface": "#ebe1d1",
+                        "surface-container-highest": "#393429",
+                        "surface-tint": "#f0c115",
+                        "surface-container-lowest": "#110e05",
+                        "secondary-fixed-dim": "#ecc23e",
+                        "on-secondary-fixed-variant": "#584400",
+                        "error": "#ffb4ab",
+                        "surface-bright": "#3e392d",
+                        "on-primary": "#3d2f00",
+                        "on-tertiary": "#00344e",
+                        "surface-container": "#231f15",
+                        "on-tertiary-container": "#005278",
+                        "primary-fixed": "#ffe08a",
+                        "tertiary-fixed": "#c9e6ff",
+                        "on-surface": "#ebe1d1",
+                        "brand-gold-primary": "#ffd555"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "container-margin": "20px",
+                        "base-unit": "4px",
+                        "stack-md": "16px",
+                        "gutter": "16px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "heading-lg": ["Montserrat"],
+                        "action-bold": ["Montserrat"],
+                        "body-sm": ["Inter"],
+                        "heading-md": ["Inter"],
+                        "display-xl": ["Montserrat"],
+                        "body-base": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "heading-lg": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "action-bold": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "700"}],
+                        "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "heading-md": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                        "display-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-base": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}]
+                    },
+                    "backgroundImage": {
+                        "brand-gold-gradient": "linear-gradient(135deg, #ffd555 0%, #ecc23e 100%)"
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { background-color: #000; overflow: hidden; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .fill-icon { font-variation-settings: 'FILL' 1; }
+        .bottom-sheet { transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1); }
+        .bottom-sheet.active { transform: translateY(0); }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #393429; border-radius: 10px; }
+    </style>
+</head>
+<body class="antialiased">
+<!-- Background: Amazon.in Page Dimmed -->
+<div class="fixed inset-0 z-0 opacity-25 cursor-pointer" onclick="window.location.href='product-detail.html'">
+<img alt="Background Product View" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-j0Ee8EV0foEvvfLg_xu8GJbWbKpoZPKPSRjE2z2l8ov2G67BTKH9MUeWjNCUU6QAhSGJJpGCDRvbXAqMBqsUOvBTquLImrxVEbu3CV9M3zqoXvlqVqEwlyL6XdhTpI2Qq1swVJEP5vtehgyNeJS5KzFU85IAjMz2-88v5XQWH6VTQXqZLaFiGTGl8bU4G71D_fAPi2zZyOV_hIjdgfzIBx4_hr3yxSTyrdMgghuGNbhjdiItjpg2aybmEohKYAPBeh909MVNqSY"/>
+</div>
+<!-- Bottom Sheet Container -->
+<div class="bottom-sheet fixed bottom-0 left-0 right-0 z-50 h-[88vh] bg-[#1E1E1E] rounded-t-[24px] flex flex-col shadow-[0_-20px_40px_rgba(0,0,0,0.5)] border-t border-[#262626]" id="cost-bottom-sheet">
+<!-- Grabber Handle -->
+<div class="w-full flex justify-center py-4 flex-shrink-0 cursor-pointer" onclick="window.location.href='product-detail.html'">
+<div class="w-10 h-1 bg-brand-gold-primary/40 rounded-full"></div>
+</div>
+<!-- Header Content -->
+<div class="px-container-margin pb-4 flex items-center space-x-4 flex-shrink-0">
+<div class="w-16 h-16 rounded-xl overflow-hidden bg-surface-container flex-shrink-0">
+<img alt="Sony Headphones Preview" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0uhqiZHbJpGRByhQ3wFUyKN-g4c4OpPsF9eDvyS8RkevS45xKljfCYstmQoJEZRmrEB3QhO96Aj0U8Th_00CssrCe6tM6rQBGfj0cFdCYJj4KJ1iWNOtTRlH2bcVF5mEk633yj1aW7si93sN1JyzZRDNLC4t11Y1gOfwxE7ZbiDvFX5PkvRmdJasC8o8C4VxYrSc5Aep33bTWA2vWK97WcZ6QtK-U3zt9zIYPXL1EekVW9uwYeQ2-AEcCUA"/>
+</div>
+<div class="flex-1 min-w-0">
+<h2 class="font-heading-md text-on-surface truncate leading-tight">Sony WH-1000XM5 Wireless Noise Canceling Headphones</h2>
+<div class="mt-1 flex items-center">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-container/20 text-primary text-[10px] font-label-caps uppercase border border-primary/20">
+                        From Amazon.in
+                    </span>
+</div>
+</div>
+</div>
+<div class="w-full border-b border-outline-variant/30"></div>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto custom-scrollbar px-container-margin py-6">
+<!-- Breakdown Table -->
+<div class="space-y-4 mb-8">
+<div class="flex justify-between items-center">
+<div class="flex items-center space-x-2 text-on-surface-variant">
+<span class="font-body-base">Item Cost (₹26,990 × 1.60)</span>
+<span class="material-symbols-outlined text-[14px]">info</span>
+</div>
+<span class="font-action-bold text-on-surface">NPR 43,184</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center space-x-2 text-on-surface-variant">
+<span class="font-body-base">Shipping (0.5 kg × 150)</span>
+<span class="material-symbols-outlined text-[14px]">info</span>
+</div>
+<span class="font-action-bold text-on-surface">NPR 75</span>
+</div>
+<div class="flex justify-between items-center py-2 px-3 bg-surface-container-low rounded-lg">
+<span class="font-body-sm text-outline uppercase tracking-wider">CIF Value</span>
+<span class="font-body-base text-outline">NPR 43,259</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center space-x-2 text-on-surface-variant">
+<span class="font-body-base">Customs Duty (15% — Electronics)</span>
+<span class="material-symbols-outlined text-[14px]">info</span>
+</div>
+<span class="font-action-bold text-on-surface">NPR 6,489</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center space-x-2 text-on-surface-variant">
+<span class="font-body-base">VAT (13%)</span>
+<span class="material-symbols-outlined text-[14px]">info</span>
+</div>
+<span class="font-action-bold text-on-surface">NPR 6,467</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center space-x-2 text-on-surface-variant">
+<span class="font-body-base">Service Fee</span>
+<span class="material-symbols-outlined text-[14px]">info</span>
+</div>
+<span class="font-action-bold text-on-surface">NPR 200</span>
+</div>
+</div>
+<!-- Grand Total Section -->
+<div class="pt-6 border-t-2 border-outline-variant/50 mb-8">
+<div class="flex flex-col items-center justify-center text-center">
+<p class="font-label-caps text-on-surface-variant mb-1 uppercase tracking-widest">Total in NPR</p>
+<p class="font-display-xl text-primary mb-2">NPR 56,399</p>
+<p class="font-body-sm text-on-surface-variant/60">All-inclusive. No hidden charges at delivery.</p>
+</div>
+</div>
+<!-- Delivery Info Card -->
+<div class="bg-surface-container-high/40 p-4 rounded-xl border border-outline-variant/30 mb-8">
+<div class="flex items-start space-x-4">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary fill-icon">local_shipping</span>
+</div>
+<div>
+<h4 class="font-action-bold text-primary text-sm mb-1">Estimated delivery: 8–12 days</h4>
+<p class="font-body-sm text-on-surface-variant leading-snug">Ships from India warehouse <span class="text-primary/60">→</span> Birgunj customs <span class="text-primary/60">→</span> Your door</p>
+</div>
+</div>
+</div>
+<!-- Payment Options -->
+<div class="space-y-4 mb-32">
+<h3 class="font-label-caps text-on-surface-variant mb-4 uppercase tracking-widest">Payment Mode</h3>
+<!-- Option 1: Selected -->
+<div class="relative p-4 rounded-xl border-2 border-primary bg-primary/5 flex items-start space-x-4 group">
+<div class="absolute top-0 right-4 -translate-y-1/2">
+<span class="bg-primary text-on-primary font-label-caps text-[10px] px-2 py-0.5 rounded-full shadow-lg">Recommended</span>
+</div>
+<div class="mt-1 flex-shrink-0">
+<div class="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+</div>
+</div>
+<div class="flex-1">
+<p class="font-action-bold text-on-surface text-sm mb-2">Pay 50% Now, 50% on Delivery</p>
+<div class="flex space-x-3 opacity-80">
+<img alt="Payment Icon" class="h-6 grayscale contrast-125" data-alt="Small discrete digital payment logo for local service integration in Nepal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlZ2DqfcTCob-miBw_vmCuRF-_Hymk1RXJDoI-ebxYj1UrYsG_xBpIxcCOJeJ-lkpvWu4xjTUHwAbzHD1pEnwnVTbAyCbRrVYv9UEdW82ramzkgLlWXtiy5b_l4OyQsdNTkNXiaBKUXYyrY8hMTdIWPxsIt9yczXCQ92yFjLXRQqHBXTuvj9_x_wqwe3kDGDsSRp8yRLWTqQwM5lAhq16W9VjxlDEiJXpJR2VsTO7AMS_ry7h2N-qdIen1ydG_lJE9SaCYcYXskKg"/>
+<img alt="Payment Icon" class="h-6 grayscale contrast-125" data-alt="Small discrete digital payment logo for local service integration in Nepal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvYbOR-waJX7C3jYginr2uUuCdpdvyC-oYHIy8nqoQK3mg9yhwlnzjPRKp84ZDgJZV8y2LawDVectay1_FBVdX-d5Y9ZfqkiVSIRDETjC327zTVrIZnhVu_ezrAtGPLJXQm6eNuko5SWSjhbPN1NJF75okJyOKC811s9W6oN7aMG-la_aZavja68x2WCDxqAnuaRocSPJcNaJOg3Qyr0_kzMNZgBxbVEmcLtqdfOJJRkcBvLkcTV5W-W3TQHpv2DDQ1MU4qutNPO8"/>
+<img alt="Payment Icon" class="h-6 grayscale contrast-125" data-alt="Small discrete digital payment logo for local service integration in Nepal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_yMc7Hql12uOZhM-crZzBZjoNSjyiXTDLfNkEie2RBk_u2Ztjf2LUeCMok9tkYloAdn45taInqscaIjyhaP7f1esHjzsmvgqt4559R_qikUiarLTvNaPWjeSfJn2yxymSI6Nt1HT31Hod78msqEyB1o-MXRMGOzGWvvAifAXAsOyIIoI3NMRplgZgx43FHW4abzj8soL_13avs1uqqmurOBXgdvuZThp9cu88UciDWXUlI6XBY2JdMVkODHel-nft0hwt3CNzOjQ"/>
+</div>
+</div>
+</div>
+<!-- Option 2: Unselected -->
+<div class="p-4 rounded-xl border border-outline-variant/30 bg-surface-container-low/50 flex items-start space-x-4 opacity-70 hover:opacity-100 transition-opacity">
+<div class="mt-1 flex-shrink-0">
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<p class="font-action-bold text-on-surface text-sm">Pay Full Now &amp; Earn 5% Cashback</p>
+<span class="material-symbols-outlined text-primary text-lg">account_balance_wallet</span>
+</div>
+<p class="font-body-sm text-on-surface-variant">Get NPR 2,820 cashback instantly</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky Footer CTA -->
+<div class="absolute bottom-0 left-0 right-0 p-container-margin bg-[#1E1E1E]/90 backdrop-blur-md border-t border-outline-variant/20">
+<button class="w-full h-[54px] bg-brand-gold-gradient rounded-xl shadow-[0_8px_24px_rgba(255,213,85,0.25)] flex flex-col items-center justify-center transform active:scale-[0.98] transition-all" onclick="window.location.href='secure-checkout.html'">
+<span class="font-action-bold text-on-primary text-[15px]">CONFIRM ORDER — NPR 28,200 NOW</span>
+<span class="text-[10px] font-medium text-on-primary/70 uppercase tracking-tight">Remaining NPR 28,199 on delivery</span>
+</button>
+<div class="h-4"></div> <!-- Bottom spacing for iOS home bar -->
+</div>
+</div>
+<!-- Micro-interaction JS -->
+<script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const sheet = document.getElementById('cost-bottom-sheet');
+            
+            // Artificial delay to show entry animation
+            setTimeout(() => {
+                sheet.classList.add('active');
+            }, 300);
+
+            // Simple drag indicator visual effect
+            let startY = 0;
+            sheet.addEventListener('touchstart', (e) => {
+                startY = e.touches[0].clientY;
+            });
+
+            sheet.addEventListener('touchmove', (e) => {
+                const currentY = e.touches[0].clientY;
+                const diff = currentY - startY;
+                if (diff > 0) {
+                    sheet.style.transform = `translateY(${diff}px)`;
+                }
+            });
+
+            sheet.addEventListener('touchend', (e) => {
+                const currentY = e.changedTouches[0].clientY;
+                const diff = currentY - startY;
+                if (diff > 100) {
+                    sheet.style.transform = `translateY(100%)`;
+                } else {
+                    sheet.style.transform = `translateY(0)`;
+                }
+            });
+        });
+    </script>
+</body></html>
